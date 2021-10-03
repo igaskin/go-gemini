@@ -13,8 +13,8 @@ import (
 )
 
 const (
-	BaseURLV1          = "https://api.gemini.com/v1/"
-	sandboxBaseURLV1   = "https://api.sandbox.gemini.com/v1/"
+	BaseURLV1          = "https://api.gemini.com"
+	sandboxBaseURLV1   = "https://api.sandbox.gemini.com"
 	defaultHTTPTimeout = 3 * time.Second
 )
 

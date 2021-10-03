@@ -3,14 +3,15 @@ package gemini
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strings"
 	"time"
 )
 
 type GetAccountDetailsInput struct {
-	ShortName string
+	Request string `json:"request"`
+	Account string `json:"account"`
+	Nonce   int64  `json:"nonce"`
 }
 
 type GetAccountDetailsResponse struct {
@@ -37,15 +38,12 @@ type Users struct {
 
 func (c *Client) GetAccountDetails(ctx context.Context, i *GetAccountDetailsInput) (*GetAccountDetailsResponse, error) {
 	var response *GetAccountDetailsResponse
-	// unix milliseconds as nonce
-	nonce := time.Now().UnixNano() / 1000000
-
-	values := map[string]string{
-		"request": "/v1/account",
-		"account": i.ShortName,
-		"nonce":   fmt.Sprintf("%d", nonce),
+	i.Request = "/v1/account"
+	if i.Nonce == 0 {
+		i.Nonce = time.Now().UnixNano() / 1000000
 	}
-	json_data, err := json.Marshal(values)
+
+	json_data, err := json.Marshal(&i)
 
 	if err != nil {
 		return nil, err
@@ -53,7 +51,7 @@ func (c *Client) GetAccountDetails(ctx context.Context, i *GetAccountDetailsInpu
 
 	req, err := http.NewRequestWithContext(ctx,
 		http.MethodPost,
-		c.BaseURL+"account",
+		c.BaseURL+"/v1/account",
 		strings.NewReader(string(json_data)),
 	)
 	if err != nil {

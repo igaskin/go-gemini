@@ -29,7 +29,7 @@ func TestClient_GetAccountDetails(t *testing.T) {
 			args: args{
 				ctx: context.Background(),
 				i: &GetAccountDetailsInput{
-					ShortName: "primary",
+					Account: "primary",
 				},
 			},
 			wantErr: false,
