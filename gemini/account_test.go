@@ -1,35 +1,10 @@
-package client
+package gemini
 
 import (
 	"context"
 	"net/http"
-	"reflect"
 	"testing"
 )
-
-func TestNewClient(t *testing.T) {
-	tests := []struct {
-		name string
-		want *Client
-	}{
-		{
-			name: "valid",
-			want: &Client{
-				BaseURL: "https://api.gemini.com/v1/",
-				HTTPClient: &http.Client{
-					Timeout: 3,
-				},
-			},
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			if got := NewClient(); !reflect.DeepEqual(got, tt.want) {
-				t.Errorf("NewClient() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
 
 func TestClient_GetAccountDetails(t *testing.T) {
 	type fields struct {
@@ -40,6 +15,7 @@ func TestClient_GetAccountDetails(t *testing.T) {
 	}
 	type args struct {
 		ctx context.Context
+		i   *GetAccountDetailsInput
 	}
 	tests := []struct {
 		name    string
@@ -52,6 +28,9 @@ func TestClient_GetAccountDetails(t *testing.T) {
 			name: "valid",
 			args: args{
 				ctx: context.Background(),
+				i: &GetAccountDetailsInput{
+					ShortName: "primary",
+				},
 			},
 			wantErr: false,
 		},
@@ -62,7 +41,7 @@ func TestClient_GetAccountDetails(t *testing.T) {
 			c := NewClient()
 			c.BaseURL = sandboxBaseURLV1
 
-			_, err := c.GetAccountDetails(tt.args.ctx)
+			_, err := c.GetAccountDetails(tt.args.ctx, tt.args.i)
 			if (err != nil) != tt.wantErr {
 				t.Errorf("Client.GetAccountDetails() error = %v, wantErr %v", err, tt.wantErr)
 				return
