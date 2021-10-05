@@ -9,8 +9,6 @@ import (
 func TestClient_NewOrder(t *testing.T) {
 	type fields struct {
 		BaseURL    string
-		apiKey     string
-		apiSecret  string
 		HTTPClient *http.Client
 	}
 	type args struct {

@@ -31,12 +31,14 @@ type Config struct {
 	BaseURL   string
 }
 
+// NewClient new client wiht defaults
 func NewClient() *Client {
 	return NewClientFromConfig(Config{
 		BaseURL: BaseURLV1,
 	})
 }
 
+// NewClientFromConfig new client using custom configurations
 func NewClientFromConfig(c Config) *Client {
 	if c.BaseURL == "" {
 		c.BaseURL = BaseURLV1

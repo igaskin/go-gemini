@@ -1,26 +1,3 @@
-# go-gemini
-unoffcial go client for Gemini
-
-[![GoDoc](https://godoc.org/github.com/igaskin/go-gemini?status.svg)](https://pkg.go.dev/github.com/igaskin/go-gemini)
-
-
-## Features
----
-* Authentication
-* Submit Buy and Sell Orders
-
-## Requirements
-* Go >= 1.15
-
-## Installation
-
-```bash
-go get github.com/igaskin/go-gemini
-```
-
-## Examples
-
-```go
 package main
 
 import (
@@ -31,10 +8,8 @@ import (
 )
 
 func main() {
-    // set environment variables
-    // GEMINI_API_KEY
-    // GEMINI_API_SECRET
 	client := gemini.NewClient()
+	client.BaseURL = "https://api.sandbox.gemini.com"
 	ctx := context.Background()
 
 	resp, err := client.NewOrder(ctx, &gemini.NewOrderInput{
@@ -53,4 +28,3 @@ func main() {
 
 	fmt.Printf("%+v\n", resp)
 }
-```

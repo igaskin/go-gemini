@@ -36,6 +36,7 @@ type Users struct {
 	IsVerified  bool      `json:"isVerified"`
 }
 
+// GetAccountDetails returns gemini account information
 func (c *Client) GetAccountDetails(ctx context.Context, i *GetAccountDetailsInput) (*GetAccountDetailsResponse, error) {
 	var response *GetAccountDetailsResponse
 	i.Request = "/v1/account"

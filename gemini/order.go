@@ -44,6 +44,7 @@ type NewOrderResponse struct {
 	RemainingAmount   string        `json:"remaining_amount"`
 }
 
+// NewOrder submits a order to the exchange
 func (c *Client) NewOrder(ctx context.Context, i *NewOrderInput) (*NewOrderResponse, error) {
 	var response *NewOrderResponse
 	i.Request = "/v1/order/new"

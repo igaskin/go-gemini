@@ -15,7 +15,7 @@ func TestNewClient(t *testing.T) {
 		{
 			name: "valid",
 			want: &Client{
-				BaseURL: "https://api.gemini.com/v1/",
+				BaseURL: "https://api.gemini.com",
 				HTTPClient: &http.Client{
 					Timeout: 3 * time.Second,
 				},
