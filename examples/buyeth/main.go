@@ -9,7 +9,6 @@ import (
 
 func main() {
 	client := gemini.NewClient()
-	client.BaseURL = "https://api.sandbox.gemini.com"
 	ctx := context.Background()
 
 	resp, err := client.NewOrder(ctx, &gemini.NewOrderInput{

@@ -5,7 +5,6 @@ unoffcial go client for Gemini
 
 
 ## Features
----
 * Authentication
 * Submit Buy and Sell Orders
 

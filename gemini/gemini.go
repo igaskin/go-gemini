@@ -29,6 +29,9 @@ type Config struct {
 	APIKey    string
 	APISecret string
 	BaseURL   string
+	// TODO(igaskin) implement heartbeatA
+	// https://docs.gemini.com/rest-api/#require-heartbeat
+	// Heartbeat bool
 }
 
 // NewClient new client wiht defaults
@@ -92,6 +95,22 @@ func (c *Client) doRequest(req *http.Request) ([]byte, error) {
 	}
 	defer resp.Body.Close()
 	body, err = ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+	if resp.StatusCode != 200 {
+		return nil, fmt.Errorf("%s", body)
+	}
+	return body, nil
+}
+
+func (c *Client) doPublicRequest(req *http.Request) ([]byte, error) {
+	resp, err := c.HTTPClient.Do(req)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
