@@ -32,6 +32,16 @@ func TestClient_Ticker(t *testing.T) {
 			},
 			wantErr: false,
 		},
+		{
+			name: "eth ticker",
+			args: args{
+				ctx: context.Background(),
+				i: &TickerInput{
+					Ticker: "ethusd",
+				},
+			},
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
