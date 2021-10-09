@@ -7,8 +7,7 @@ import (
 )
 
 type TickerInput struct {
-	Request string
-	Ticker  string
+	Ticker string
 }
 
 type TickerResponse struct {
@@ -26,11 +25,11 @@ type Volume struct {
 // Ticker get ticker information about trading symbols
 func (c *Client) Ticker(ctx context.Context, i *TickerInput) (*TickerResponse, error) {
 	var response *TickerResponse
-	i.Request = "/v1/pubticker/"
+	request := "/v1/pubticker/"
 
 	req, err := http.NewRequestWithContext(ctx,
 		http.MethodGet,
-		c.BaseURL+i.Request+i.Ticker,
+		c.BaseURL+request+i.Ticker,
 		nil,
 	)
 	if err != nil {

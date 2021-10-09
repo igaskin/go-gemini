@@ -52,7 +52,7 @@ func (c *Client) GetAccountDetails(ctx context.Context, i *GetAccountDetailsInpu
 
 	req, err := http.NewRequestWithContext(ctx,
 		http.MethodPost,
-		c.BaseURL+"/v1/account",
+		c.BaseURL+i.Request,
 		strings.NewReader(string(json_data)),
 	)
 	if err != nil {
