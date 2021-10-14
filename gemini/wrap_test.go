@@ -32,7 +32,7 @@ func TestClient_WrapOrder(t *testing.T) {
 				i: &WrapOrderInput{
 					Side:    "sell",
 					Amount:  "1",
-					symbol:  "gusdusd",
+					Symbol:  "gusdusd",
 					Account: "primary",
 				},
 			},

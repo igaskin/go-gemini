@@ -16,7 +16,7 @@ type WrapOrderInput struct {
 	Amount        string `json:"amount"`
 	Side          string `json:"side"`
 	ClientOrderID string `json:"client_order_id"`
-	symbol        string
+	Symbol        string `json:"-"`
 }
 
 type WrapOrderResponse struct {
@@ -37,7 +37,7 @@ type WrapOrderResponse struct {
 
 func (c *Client) WrapOrder(ctx context.Context, i *WrapOrderInput) (*WrapOrderResponse, error) {
 	var response *WrapOrderResponse
-	i.Request = "/v1/wrap/" + i.symbol
+	i.Request = "/v1/wrap/" + i.Symbol
 	if i.Nonce == 0 {
 		i.Nonce = time.Now().UnixNano() / 1000000
 	}
