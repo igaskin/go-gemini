@@ -64,7 +64,7 @@ func (c *Client) Balances(ctx context.Context) (*BalancesResponse, error) {
 
 func (c *Client) BalanceSymbol(ctx context.Context, i *BalancesResponse, symbol string) (*Balance, error) {
 	for _, v := range *i {
-		if v.Currency == symbol {
+		if strings.EqualFold(v.Currency, symbol) {
 			return &Balance{
 				Type:                   v.Type,
 				Currency:               v.Currency,
